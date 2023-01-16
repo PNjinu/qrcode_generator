@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %} QR Code Generator {% endblock%}
+{% block content %}
+    <h1 class="title">QR Code Generator</h1>
+
+    <form action="{{ url_for('generate') }}" method="post">
+        <div class="row align-items-center">
+            <div class="col-auto">
+              <label for="data" class="col-form-label">Enter text/link/number for QR code:</label>
+              <input type="text" id="data" name="data" class="form-control mb-2" required>
+              <input type="submit" class="btn btn-primary mb-3" value="Generate QR code">
+            </div>
+
+        </div>
+    </form>
+{% endblock content %}

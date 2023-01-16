@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} QR Code{% endblock%}
+{% block content %}
+    <h1 class="title">QR Code</h1>
+    <div class="row">
+        <div class="col-12">
+            <p>Data: {{ data }}</p>
+        </div>
+        <div class="col-12 justicy">
+            <img src="data:image/png;base64, {{ img_base64 }}" alt="QR code">
+        </div>
+    </div>
+    <div class = "row download_button mt-3 mb-3">
+        <div class="col">
+            <form action="{{ url_for('download', file_type='png', img_io=img_io) }}" method="get">
+                <input type="submit" class="btn btn-primary" value="Download as PNG">
+            </form>
+        </div>
+        <div class="col">
+            <form action="{{ url_for('download', file_type='svg', img_io=img_io) }}" method="get">
+                <input type="submit" class="btn btn-warning"value="Download as SVG">
+            </form> 
+        </div>
+    </div>
+{% endblock content %}
