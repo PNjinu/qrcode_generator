@@ -1,4 +1,4 @@
-import qrcode, qrcodegen, base64
+import qrcode, base64
 from flask import Flask, render_template, request, send_file, session, make_response
 from io import BytesIO
 
@@ -7,9 +7,6 @@ app.secret_key = 'Your secret key'
 
 # Create QR code object
 qr = qrcode.QRCode(version=1, box_size=10, border=5)
-qr2 = ""
-#data = ""
-
 
 @app.route("/")
 def index():
@@ -19,7 +16,6 @@ def index():
 def generate():
     data = request.form['data']
     session['data'] = data
-    qr2 = qrcodegen.QrCode.encode_text(data, qrcodegen.QrCode.Ecc.HIGH)
     qr.add_data(data)
     qr.make(fit=True)
 
@@ -36,7 +32,7 @@ def generate():
     # This version can be displayed on browser
     img_base64 = base64.b64encode(img_io.getvalue()).decode()
 
-    return render_template("generate.html", data=data, img_io=img_io, img_base64=img_base64, img=img)
+    return render_template("generate.html", data=data, img_io=img_io, img_base64=img_base64)
 
 @app.route('/download/<string:file_type>')
 def download(file_type):
